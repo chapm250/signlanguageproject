@@ -20,6 +20,8 @@ function ButtonCtrl($scope, buttonApi){
     $scope.switchVideo = switchVideo;
     $scope.checkAnswer = checkAnswer;
     $scope.answer = 'remember no upper case';
+    $scope.correctAnswer = '';
+    $scope.giveUp = giveUp;
 
     //function switchVideo() {
     //    $scope.video = 'videos/test3.webm';
@@ -30,6 +32,7 @@ function ButtonCtrl($scope, buttonApi){
         buttonApi.switchVideo()
             .success(function(data){
                 $scope.video = data;
+                $scope.correctAnswer = '';
                 $scope.answer = 'remember no upper case!!!!!'
             })
             .error(function() {
@@ -37,17 +40,18 @@ function ButtonCtrl($scope, buttonApi){
             })
     }
     function checkAnswer(guess) {
-        guess = 'videos/' + guess + '.webm'
+        guess = 'videos/' + guess + '.webm';
         if(guess == $scope.video){
-            $scope.answer = 'Correct!!!!'
-            console.log('correct ' + guess)
+            $scope.answer = 'Correct!!!!';
         } else {
-            console.log('the guess was ' + guess)
-            console.log('the answer is  =' + $scope.video)
+            
             $scope.answer = 'WRONG BITCH'
 
         }
 
+    }
+    function giveUp() {
+        $scope.correctAnswer = 'Dont be a quitter the answer is... ' + $scope.video.substring(7, $scope.video.length - 5);
     }
 }
 
