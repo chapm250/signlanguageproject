@@ -16,8 +16,10 @@ angular.module('buttons',[])
 
 
 function ButtonCtrl($scope, buttonApi){
-    $scope.video = 'videos/test1.webm';
+    $scope.video = 'videos/and.webm';
     $scope.switchVideo = switchVideo;
+    $scope.checkAnswer = checkAnswer;
+    $scope.answer = 'remember no upper case';
 
     //function switchVideo() {
     //    $scope.video = 'videos/test3.webm';
@@ -28,10 +30,23 @@ function ButtonCtrl($scope, buttonApi){
         buttonApi.switchVideo()
             .success(function(data){
                 $scope.video = data;
+                $scope.answer = 'remember no upper case!!!!!'
             })
             .error(function() {
                 console.log("fuck");
             })
+    }
+    function checkAnswer(guess) {
+        guess = 'videos/' + guess + '.webm'
+        if(guess == $scope.video){
+            $scope.answer = 'Correct!!!!'
+            console.log('correct ' + guess)
+        } else {
+            console.log('the guess was ' + guess)
+            console.log('the answer is  =' + $scope.video)
+            $scope.answer = 'WRONG BITCH'
+
+        }
 
     }
 }
