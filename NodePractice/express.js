@@ -9,7 +9,9 @@ app.use(express.static(__dirname));
 
 
 app.get('/switchVideo', function(req, res){
-    res.send("videos/test2.webm");
+    var files = ["videos/test1.webm", "videos/test2.webm", "videos/test3.webm"]
+    res.send(files[Math.floor((Math.random() * 3))]);
+
 });
 
 app.listen(port);
