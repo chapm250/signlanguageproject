@@ -1,7 +1,7 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title>AngularJS Tutorial</title>
+    <title>Sign Language Website</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.4/angular.min.js"></script>
     <script src="main.ctrl.js"></script>
@@ -9,17 +9,24 @@
 
 <body ng-app="buttons">
 <div class = "container-fluid">
-    <div id="buttons" ng-controller="buttonCtrl" >
+    <div style="padding-top: 50px" id="buttons" ng-controller="buttonCtrl" >
 
-        <button ng-click = "switchVideo();"> New Video</button>
+        <button  ng-click = "switchVideo();"> Random Sign</button>
 
-        <video width = "320" height = "240" controls>
-            <source src = "videos/test1.webm">
-        </video>
 
-        <video ng-src = "{{video}}" width = "640" height = "480" controls/>
+            <input id="formguess" type="text"  ng-model="text" name="text" />
+            <button ng-click = "checkAnswer(text);">Answer</button>
+            {{answer}}
+        <br>
+        <button ng-click = "giveUp();">I surrender</button> {{correctAnswer}}
+
+        <br>
+        <video muted autoplay ng-src = "{{video}}" width = "640" height = "480" controls loop/>
+
 
     </div>
 </div>
 </body>
 </html>
+
+<!--videos/test.webm-->
