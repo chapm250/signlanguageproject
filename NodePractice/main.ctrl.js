@@ -19,9 +19,11 @@ function ButtonCtrl($scope, buttonApi){
     $scope.video = 'videos/and.webm';
     $scope.switchVideo = switchVideo;
     $scope.checkAnswer = checkAnswer;
-    $scope.answer = 'remember no upper case';
+    $scope.answer = 'remember no upper case & all one word';
     $scope.correctAnswer = '';
     $scope.giveUp = giveUp;
+    $scope.changeChapters = changeChapters;
+    $scope.currentChapter = 'videos';
 
     //function switchVideo() {
     //    $scope.video = 'videos/test3.webm';
@@ -33,14 +35,14 @@ function ButtonCtrl($scope, buttonApi){
             .success(function(data){
                 $scope.video = data;
                 $scope.correctAnswer = '';
-                $scope.answer = 'remember no upper case!!!!!'
+                $scope.answer = 'remember no upper case & all one word'
             })
             .error(function() {
                 console.log("fuck");
             })
     }
     function checkAnswer(guess) {
-        guess = 'videos/' + guess + '.webm';
+        guess = $scope.currentChapter + '/' + guess + '.webm';
         if(guess == $scope.video){
             $scope.answer = 'Correct!!!!';
         } else {
@@ -49,6 +51,14 @@ function ButtonCtrl($scope, buttonApi){
 
         }
 
+    }
+
+    function changeChapters(chapter) {
+        buttonApi.changeChapters(chapter)
+            .success(function(data){
+            $scope.video = data;
+                $scope.currentChapter = chapter;
+            })
     }
     function giveUp() {
         $scope.correctAnswer = 'Dont be a quitter the answer is... ' + $scope.video.substring(7, $scope.video.length - 5);
@@ -59,6 +69,10 @@ function buttonApi($http,apiUrl){
     return {
         switchVideo: function() {
             var url = apiUrl + '/switchVideo';
+            return $http.get(url);
+        },
+        changeChapters: function(chapter) {
+            var url = apiUrl + '/changeChapters?chapter=' + chapter;
             return $http.get(url);
         }
     };

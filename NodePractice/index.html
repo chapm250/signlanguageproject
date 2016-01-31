@@ -10,15 +10,17 @@
 <body ng-app="buttons">
 <div class = "container-fluid">
     <div style="padding-top: 50px" id="buttons" ng-controller="buttonCtrl" >
-
-        <button  ng-click = "switchVideo();"> Random Sign</button>
+        <button class ="btn btn-default" accesskey="u" ng-click = changeChapters("files") type = "button"> All Chapters</button>
+        <button class ="btn btn-default" accesskey="s" ng-click = changeChapters("chapt2") type = "button">Chapter 2</button>
+        <br>
+        <button class = "btn btn-default" accesskey="n" ng-click = "switchVideo();" type = "button"> Random Sign</button>
 
 
             <input id="formguess" type="text"  ng-model="text" name="text" />
-            <button ng-click = "checkAnswer(text);">Answer</button>
+            <button class = "btn btn-default"  accesskey="a" ng-click = "checkAnswer(text);" type = "submit">Answer</button>
             {{answer}}
         <br>
-        <button ng-click = "giveUp();">I surrender</button> {{correctAnswer}}
+        <button class = "btn btn-default" ng-click = "giveUp();" type = "button">I surrender</button> {{correctAnswer}}
 
         <br>
         <video muted autoplay ng-src = "{{video}}" width = "640" height = "480" controls loop/>
